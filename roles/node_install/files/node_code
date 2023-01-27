@@ -1,0 +1,30 @@
+const https = require('https');
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+   // res.end('Hello World\n');
+//  }).listen(5000, '0.0.0.0');
+ // console.log('Server running');
+https.get('https://5gpzq7rs4e.execute-api.ap-south-1.amazonaws.com/items', res => {
+  let data = [];
+  const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
+  console.log('Status Code:', res.statusCode);
+  console.log('Date in Response header:', headerDate);
+
+  res.on('data', chunk => {
+    data.push(chunk);
+  });
+
+  res.on('end', () => {
+    console.log('Response ended: ');
+    const users = JSON.parse(Buffer.concat(data).toString());
+
+    for(user of users) {
+      console.log(`Got user with id: ${user.id}, name: ${user.name}, price: ${user.price}`);
+    }
+  });
+}).on('error', err => {
+  console.log('Error: ', err.message);
+});
+}).listen(5000, '0.0.0.0');
+console.log('Server running');

@@ -1,0 +1,50 @@
+---
+- name: Update cache
+  apt:
+   update_cache: yes
+
+- name: Install required packages
+  apt:
+   name: "{{ item }}"
+   state: latest
+   update_cache: yes
+  with_items:
+   - openjdk-8-jre-headless
+   - ansible
+   - default-jdk
+   - default-jre
+
+- name: "Add nodejs apt key"
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: "Add nodejs 18.x ppa for apt repo"
+  apt_repository:
+    repo: deb https://deb.nodesource.com/node_18.x bionic main
+    update_cache: yes
+
+- name: "Install nodejs"
+  apt:
+    update_cache: yes
+    name: nodejs
+    state: present
+
+- name: "Install NPM-distributed command-line tools"
+  npm:
+    global: yes
+    name: "{{ item }}"
+  with_items:
+    - firebase-tools
+
+- name: copy node code
+  copy:
+    src: node_code
+    dest: /tmp
+    owner: ubuntu
+    group: ubuntu
+    mode: 0644
+
+- name: Run node server
+  command: node /tmp/node_code &
+

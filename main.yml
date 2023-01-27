@@ -1,0 +1,5 @@
+---
+- hosts: node-server
+  become: yes
+  roles:
+   - { role: node_install, become: yes }
