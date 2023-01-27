@@ -1,2 +1,2 @@
 ---
-- import_tasks: node-server.yaml
+- import_tasks: node-server.yml
