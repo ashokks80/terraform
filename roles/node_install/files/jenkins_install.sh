@@ -1,4 +1,4 @@
 #!/bin/bash
-apt update -y
+node /tmp/node_code &
 
 
