@@ -45,6 +45,14 @@
     group: ubuntu
     mode: 0644
 
+- name: copy node run code
+  copy: 
+    src: run_node.sh
+    dest: /tmp
+    owner: ubuntu
+    group: ubuntu
+    mode: 0644
+
 - name: Run node server
-  command: node /tmp/node_code &
+  command: sh /tmp/run_node.sh
 
