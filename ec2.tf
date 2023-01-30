@@ -25,6 +25,7 @@ resource "aws_instance" "node-server" {
   tags = {
     Name = "node-server"
   }
+    depends_on = [aws_apigatewayv2_api.crud-api]
 }
 
 resource "aws_iam_role" "iam_for_ec2_api_gateway" {
