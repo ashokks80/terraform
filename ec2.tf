@@ -19,7 +19,7 @@ resource "aws_instance" "node-server" {
   #count = 2
   instance_type               = "t3.medium"
   key_name                    = var.key_name
-  subnet_id                   = aws_subnet.private_subnet_4.id
+  subnet_id                   = aws_subnet.public_subnet_4.id
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
   associate_public_ip_address = false
   tags = {
