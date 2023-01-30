@@ -41,7 +41,7 @@ resource "aws_lambda_function" "learn-crud" {
   filename      = "lambdafile.zip"
   function_name = "learn-crud"
   role          = aws_iam_role.iam_for_lambda_dynamo.arn
-  handler       = "index.mjs"
+#   handler       = "index.mjs"
 
   # The filebase64sha256() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
