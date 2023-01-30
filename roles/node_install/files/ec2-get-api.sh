@@ -8,3 +8,4 @@ echo $apigateway_url
 export api_gateway_url=$apigateway_url
 echo "api_gateway_url='${apigateway_url}'" >> ~/.bashrc
 echo "$apigateway_url URL THIS IS"
+source ~/.bashrc
