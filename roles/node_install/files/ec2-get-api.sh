@@ -9,3 +9,4 @@ export api_gateway_url=$apigateway_url
 touch .env
 echo "API_GATEWAY_URL=${apigateway_url}" > .env
 echo "$apigateway_url URL THIS IS"
+npm install dotenv --save
