@@ -19,24 +19,26 @@ resource "aws_instance" "node-server" {
   #count = 2
   instance_type               = "t3.medium"
   key_name                    = var.key_name
-  subnet_id                   = aws_subnet.public_subnet_3.id
+  subnet_id                   = aws_subnet.private_subnet_4.id
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   tags = {
     Name = "node-server"
   }
     depends_on = [aws_apigatewayv2_api.crud-api]
 }
 
-resource "aws_iam_instance_profile" "roleec2" {
+
+
+
+resource "aws_iam_instance_profile" "role_ec2" {
   name = "roleec2get"
-  role = aws_iam_role.roleec2apiget.name
+  role = aws_iam_role.role_ec2_api_get.name
 }
 
-resource "aws_iam_role" "roleec2apiget" {
-  name = "ec2apiget"
+resource "aws_iam_role" "role_ec2_api_get" {
+  name = "roleec2apiget"
   path = "/"
-
   assume_role_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -53,3 +55,25 @@ resource "aws_iam_role" "roleec2apiget" {
 }
 EOF
 }
+
+resource "aws_iam_policy" "ec2_policy" {
+  name = "ec2_policy"
+  path = "/"
+  description = "policy to provider permission on ec2"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow",
+        Action =  "*" ,
+        Resource = "*"
+      }
+    ]
+})
+}
+
+resource "aws_iam_policy_attachment" "ec2_policy_role" {
+  name = "ec2_attachment"
+  roles = [aws_iam_role.role_ec2_api_get.name]
+  policy_arn = aws_iam_policy.ec2_policy.arn
+  }
