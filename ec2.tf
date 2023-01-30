@@ -28,45 +28,28 @@ resource "aws_instance" "node-server" {
     depends_on = [aws_apigatewayv2_api.crud-api]
 }
 
-resource "aws_iam_policy" "ec2_api_policy" {
-  name        = "ec2_Access"
-  description = "ec2_access"
-  path        = "/"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-              "apigateway:GET"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
+resource "aws_iam_instance_profile" "role-ec2" {
+  name = "role-ec2-get"
+  role = aws_iam_role.role-ec2-api-get.arn
 }
 
-resource "aws_iam_role" "ec2_api_role" {
-  name        = "api_ec2"
-  description = "ec2_access"
+resource "aws_iam_role" "role-ec2-api-get" {
+  name = "role-ec2-api-get"
+  path = "/"
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "ec2.amazonaws.com"
+  assume_role_policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+               "Service": "ec2.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
         }
-      },
     ]
-  })
 }
-
-resource "aws_iam_role_policy_attachment" "policy_attachment" {
-  role       = aws_iam_role.ec2_api_role.name
-  policy_arn = aws_iam_policy.ec2_api_policy.arn
+EOF
 }
