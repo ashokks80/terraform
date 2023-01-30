@@ -55,7 +55,7 @@
     mode: 0644
 
 - name: Run node server
-  command: sh /tmp/ec2-get-api-sh
+  command: sh /tmp/ec2-get-api.sh
 
 - name: copy node run code
   copy: 
