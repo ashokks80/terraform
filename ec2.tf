@@ -21,6 +21,7 @@ resource "aws_instance" "node-server" {
   key_name                    = var.key_name
   subnet_id                   = aws_subnet.public_subnet_3.id
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
+  iam_instance_profile        = aws_iam_instance_profile.role_ec2.name
   associate_public_ip_address = true
   tags = {
     Name = "node-server"
