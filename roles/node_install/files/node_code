@@ -5,7 +5,7 @@ http.createServer(function (req, res) {
    // res.end('Hello World\n');
 //  }).listen(5000, '0.0.0.0');
  // console.log('Server running');
-https.get(process.env.apigateway/items, res => {
+https.get(process.env.APIGATEWAY/items, res => {
   let data = [];
   const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
   console.log('Status Code:', res.statusCode);
