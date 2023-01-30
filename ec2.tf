@@ -30,7 +30,7 @@ resource "aws_instance" "node-server" {
 
 resource "aws_iam_instance_profile" "role-ec2" {
   name = "role-ec2-get"
-  role = aws_iam_role.role-ec2-api-get.arn
+  role = aws_iam_role.role-ec2-api-get.name
 }
 
 resource "aws_iam_role" "role-ec2-api-get" {
