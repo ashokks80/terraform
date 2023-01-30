@@ -60,8 +60,7 @@ resource "aws_iam_role" "ec2_api_role" {
         Sid    = ""
         Principal = {
           Service = "ec2.amazonaws.com"
-        },
-         "Action": "sts:AssumeRole"
+        }
       },
     ]
   })
