@@ -28,13 +28,13 @@ resource "aws_instance" "node-server" {
     depends_on = [aws_apigatewayv2_api.crud-api]
 }
 
-resource "aws_iam_instance_profile" "role-ec2" {
-  name = "role-ec2-get"
-  role = aws_iam_role.role-ec2-api-get.name
+resource "aws_iam_instance_profile" "roleec2" {
+  name = "roleec2get"
+  role = aws_iam_role.role-ec2apiget.name
 }
 
-resource "aws_iam_role" "role-ec2-api-get" {
-  name = "role-ec2-api-get"
+resource "aws_iam_role" "roleec2apiget" {
+  name = "ec2apiget"
   path = "/"
 
   assume_role_policy = <<EOF
