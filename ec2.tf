@@ -27,3 +27,22 @@ resource "aws_instance" "node-server" {
   }
 }
 
+resource "aws_iam_role" "iam_for_ec2_api_gateway" {
+  name = "iam_for_ec2_api_gateway"
+  assume_role_policy = <<EOF
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "apigateway:GET"
+      ],
+      "Resource": [
+        "arn:aws:apigateway:us-east-1::/apis/"${aws_apigatewayv2_api.crud-api.id}"/*"
+      ]
+    }
+  ]
+ }
+EOF
+}
