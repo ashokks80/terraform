@@ -11,7 +11,7 @@ module "single_account_single_region" {
   }
 
   this_vpc_id = aws_vpc.crud-task.id
-  peer_vpc_id = var.peerid.id
+  peer_vpc_id = var.peerid.default
 
   auto_accept_peering = true
 
