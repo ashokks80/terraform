@@ -3,7 +3,7 @@
 # }
 
 module "single_account_single_region" {
-  source = "../../"
+  source  = "grem11n/vpc-peering/aws//examples/single-account-single-region"
 
   providers = {
     aws.this = aws
