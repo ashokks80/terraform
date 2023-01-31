@@ -1,7 +1,7 @@
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.crud-task.id
   availability_zone       = "${var.region}a"
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "30.0.1.0/24"
   map_public_ip_on_launch = true
 
   tags = {
@@ -12,7 +12,7 @@ resource "aws_subnet" "public_subnet_1" {
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.crud-task.id
   availability_zone       = "${var.region}b"
-  cidr_block              = "10.0.2.0/24"
+  cidr_block              = "30.0.2.0/24"
   map_public_ip_on_launch = true
 
   tags = {
@@ -23,7 +23,7 @@ resource "aws_subnet" "public_subnet_2" {
 resource "aws_subnet" "public_subnet_3" {
   vpc_id                  = aws_vpc.crud-task.id
   availability_zone       = "${var.region}c"
-  cidr_block              = "10.0.3.0/24"
+  cidr_block              = "30.0.3.0/24"
   map_public_ip_on_launch = true
 
   tags = {
@@ -35,7 +35,7 @@ resource "aws_subnet" "public_subnet_3" {
 resource "aws_subnet" "private_subnet_4" {
   vpc_id                  = aws_vpc.crud-task.id
   availability_zone       = "${var.region}c"
-  cidr_block              = "10.0.4.0/24"
+  cidr_block              = "30.0.4.0/24"
   map_public_ip_on_launch = false
 
   tags = {
@@ -47,7 +47,7 @@ resource "aws_subnet" "private_subnet_4" {
 resource "aws_subnet" "private_subnet_5" {
   vpc_id                  = aws_vpc.crud-task.id
   availability_zone       = "${var.region}b"
-  cidr_block              = "10.0.5.0/24"
+  cidr_block              = "30.0.5.0/24"
   map_public_ip_on_launch = false
 
   tags = {
