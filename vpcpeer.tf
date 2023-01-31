@@ -1,6 +1,6 @@
-provider "aws" {
-  region     = "us-east-1"
-}
+# provider "aws" {
+#   region     = "us-east-1"
+# }
 
 module "single_account_single_region" {
   source = "../../"
