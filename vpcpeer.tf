@@ -12,7 +12,6 @@ requester {
 }
 
 resource "aws_vpc_peering_connection_accepter" "accepter" {
-  provider                  = "aws.accepter"
   vpc_peering_connection_id = "${aws_vpc_peering_connection.vpc-peering.id}"
   auto_accept               = true
 }
