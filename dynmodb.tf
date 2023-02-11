@@ -1,6 +1,6 @@
 resource "aws_dynamodb_table" "learn-crud" {
   name           = "learn-crud"
-  hash_key       = "Id"
+  hash_key       = "id"
   read_capacity  = 2
   write_capacity = 2
 
