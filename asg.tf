@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "asg_private" {
   }
   tag {
     key                 = "Name"
-    value               = "node-server"
+    value               = "node-server-private"
     propagate_at_launch = true
   }
 }
