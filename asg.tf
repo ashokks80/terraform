@@ -33,7 +33,7 @@ resource "aws_launch_configuration" "node-server_private" {
 }
 
 resource "aws_autoscaling_group" "asg_private" {
-  name                 = aws_instance.node-server_private.name
+  name                 = aws_instance.node-server_private.id
   launch_configuration = aws_launch_configuration.node-server_private.id
   min_size             = 1
   max_size             = 4
