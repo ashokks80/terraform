@@ -29,6 +29,20 @@ resource "aws_instance" "node-server" {
     depends_on = [aws_apigatewayv2_api.crud-api]
 }
 
+resource "aws_instance" "node-server_private" {
+  ami                         = data.aws_ami.ubuntu.id
+  #count = 2
+  instance_type               = "t3.medium"
+  key_name                    = var.key_name
+  subnet_id                   = aws_subnet.private_subnet_4.id
+  vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
+  iam_instance_profile        = aws_iam_instance_profile.role_ec2.name
+  associate_public_ip_address = false
+  tags = {
+    Name = "node-server"
+  }
+    depends_on = [aws_apigatewayv2_api.crud-api]
+}
 
 
 
