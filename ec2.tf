@@ -30,7 +30,6 @@ resource "aws_instance" "node-server" {
 
 resource "aws_instance" "node-server_private" {
   ami                         = aws_ami_from_instance.aws_ami_from_instance.id
-
   instance_type               = "t3.medium"
   key_name                    = var.key_name
   subnet_id                   = aws_subnet.private_subnet_4.id
