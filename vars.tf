@@ -1,5 +1,5 @@
 variable "key_name" {
-  default = "crud-learn"
+  default = "crud"
 }
 variable "region" {
   default = "us-east-1"
