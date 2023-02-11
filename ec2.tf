@@ -16,7 +16,6 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "node-server" {
   ami                         = data.aws_ami.ubuntu.id
-  #count = 2
   instance_type               = "t3.medium"
   key_name                    = var.key_name
   subnet_id                   = aws_subnet.public_subnet_3.id
@@ -30,8 +29,8 @@ resource "aws_instance" "node-server" {
 }
 
 resource "aws_instance" "node-server_private" {
-  ami                         = data.aws_ami.ubuntu.id
-  #count = 2
+  ami                         = aws_ami_from_instance.aws_ami_from_instance.id
+
   instance_type               = "t3.medium"
   key_name                    = var.key_name
   subnet_id                   = aws_subnet.private_subnet_4.id
@@ -39,9 +38,9 @@ resource "aws_instance" "node-server_private" {
   iam_instance_profile        = aws_iam_instance_profile.role_ec2.name
   associate_public_ip_address = false
   tags = {
-    Name = "node-server"
+    Name = "node-server-private"
   }
-    depends_on = [aws_apigatewayv2_api.crud-api]
+    depends_on = [aws_ami_from_instance.aws_ami_from_instance.name]
 }
 
 
