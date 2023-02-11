@@ -5,7 +5,7 @@ resource "aws_dynamodb_table" "learn-crud" {
   write_capacity = 2
 
   attribute {
-    name = "Id"
+    name = "id"
     type = "S"
   }
 
