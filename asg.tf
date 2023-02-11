@@ -21,6 +21,34 @@ resource "aws_launch_configuration" "node-server" {
   }
 }
 
+resource "aws_launch_configuration" "node-server_private" {
+  name_prefix     = "node-server-lb"
+  image_id        = aws_ami_from_instance.aws_ami_from_instance.id
+  instance_type   = "t3.medium"
+  key_name        = var.key_name
+  security_groups = [aws_security_group.ec2_sg.id]
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_autoscaling_group" "asg" {
+  name                 = aws_instance.node-server_private.name
+  launch_configuration = aws_launch_configuration.node-server_private.id
+  min_size             = 1
+  max_size             = 4
+  vpc_zone_identifier  = [aws_subnet.private_subnet_4.id, aws_subnet.private_subnet_5.id]
+
+  lifecycle {
+    create_before_destroy = true
+  }
+  tag {
+    key                 = "Name"
+    value               = "node-server"
+    propagate_at_launch = true
+  }
+}
+
 resource "aws_autoscaling_group" "asg" {
   name                 = aws_instance.node-server.id
   launch_configuration = aws_launch_configuration.node-server.name
