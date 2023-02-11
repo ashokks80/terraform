@@ -54,7 +54,7 @@ resource "aws_apigatewayv2_integration" "crud-api" {
   api_id = aws_apigatewayv2_api.crud-api.id
   integration_uri    = aws_lambda_function.learn-crud.invoke_arn
   integration_type   = "AWS_PROXY"
-  integration_method = "POST"
+  integration_method = "ANY"
 }
 
 resource "aws_apigatewayv2_route" "any" {
