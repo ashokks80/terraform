@@ -12,6 +12,6 @@ resource "aws_s3_bucket" "crud" {
 resource "aws_s3_bucket" "my-bucket-copy" {
 
   provisioner "local-exec" {
-     command = "aws s3 cp roles/node_install/files/node_code ${aws_s3_bucket.crud.id}"
+     command = "aws s3 cp roles/node_install/files/node_code s3://${aws_s3_bucket.crud.id}"
   }
 }
