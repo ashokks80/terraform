@@ -10,3 +10,4 @@ touch .env
 echo "API_GATEWAY_URL=${apigateway_url}" > .env
 echo "$apigateway_url URL THIS IS"
 npm install dotenv --save
+aws s3 cp s3://crud-s3-testing-api/node_code /tmp
