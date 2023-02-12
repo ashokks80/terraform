@@ -41,7 +41,7 @@ resource "aws_instance" "node-server_private" {
     Name = "node-server-private"
   }
     depends_on = [aws_ami_from_instance.aws_ami_from_instance]
-    user_data = file(roles/node_install/files/ec2-get-api.sh)
+    user_data = file("roles/node_install/files/ec2-get-api.sh")
 }
 
 
