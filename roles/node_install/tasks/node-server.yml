@@ -54,7 +54,7 @@
     group: ubuntu
     mode: 0644
 
-- name: Run node server
+- name: copy apigateway
   command: sh /tmp/ec2-get-api.sh
 
 - name: copy node run code
