@@ -68,18 +68,21 @@ resource "aws_apigatewayv2_route" "any_get" {
   api_id = aws_apigatewayv2_api.crud-api.id
   route_key = "GET /items"
   target    = "integrations/${aws_apigatewayv2_integration.crud-api.id}"
+  depends_on = [aws_apigatewayv2_route.any]
 }
 
 resource "aws_apigatewayv2_route" "any_get_all" {
   api_id = aws_apigatewayv2_api.crud-api.id
   route_key = "GET /items/{id}"
   target    = "integrations/${aws_apigatewayv2_integration.crud-api.id}"
+  depends_on = [aws_apigatewayv2_route.any_get]
 }
 
 resource "aws_apigatewayv2_route" "any_delete_all" {
   api_id = aws_apigatewayv2_api.crud-api.id
   route_key = "DELETE /items/{id}"
   target    = "integrations/${aws_apigatewayv2_integration.crud-api.id}"
+  depends_on = [aws_apigatewayv2_route.any_get_all]
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
